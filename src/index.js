@@ -6,6 +6,7 @@ import path from 'path';
 
 const docsSrc = load('src/docs.json');
 
+
 const createRequeredFolders = (filename) => {
   const folders = filename.split(path.sep).slice(0, -1);
   if (folders.length) {
@@ -68,18 +69,24 @@ const addExtrasToDocs = async (docs) => {
       );
 
       const docExtras = JSON.parse(JSON.parse(dataResponse.body).d);
+      const promises = [];
 
       docExtras.Sources.forEach((src) => {
         src.Instructions.forEach((instruction) => {
           instruction.Images.forEach(async (image) => {
-            const pdfResponse = await got(
+            promises.push(got(
               `https://grls.rosminzdrav.ru${image.Url}`
-            );
+            ).then(pdfResponse => {
+              if (!pdfResponse) console.log(image.Url);
+              pdfResponse && writePdfFile(`data${image.Url}`, pdfResponse.rawBody);
+            }));
 
-            writePdfFile(`data${image.Url}`, pdfResponse.rawBody);
+            
           });
         });
       });
+
+      await Promise.all(promises)
 
       return {
         docId,
