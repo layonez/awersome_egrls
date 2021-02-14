@@ -29,6 +29,15 @@ npm i
 npm run start
 ```
 
+## Обработка полученного датасета ведется в
+
+* https://colab.research.google.com/drive/1c18KQgUThQPzIlvjZuJc47lKJwmiNaYR#scrollTo=B6VYQADEf4Vp
+* https://colab.research.google.com/drive/1F5gaoYlRYpaq8vz0RawBF_99qbwICI6y#scrollTo=RzM9w9tF0J5w
+
+## Старый репозиторий
+
+https://github.com/wooferclaw/GRLS-parser
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
